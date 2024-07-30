@@ -1,0 +1,40 @@
+<br>
+<table class="table table-bordered table-striped table-hover" id="tbl-cines">
+    <thead>
+        <tr>
+            <th class="text-center">ID</th>
+            <th class="text-center">NOMBRE</th>
+            <th class="text-center">DIRECCION </th>
+            <th class="text-center">TELEFONO</th>
+            <th class="text-center">ACCIONES</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cineTemporal in cines %}
+            <tr>
+                <td class="text-center">{{ cineTemporal.id }}</td>
+                <td class="text-center">{{ cineTemporal.nombre }}</td>
+                <td class="text-center">{{ cineTemporal.direccion }}</td>
+                <td class="text-center">{{ cineTemporal.telefono }}</td>
+                <td class="text-center">
+                    <a href="" class="btn btn-outline-warning btn-circle"
+                    title="Editar Cine">
+                        <i class="fas fa-pencil"></i>
+                    </a>
+                    <a href="" onclick="return confirm('¿Estás seguro?');" class="btn btn-outline-danger btn-circle">
+                        <i class="fas fa-trash"> </i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+    var table = new DataTable('#tbl-cines');
+</script>
+<style>
+    .btn-circle{
+        border-radius:100px !important;
+    }
+</style>

@@ -1,0 +1,35 @@
+{% extends "./plantilla.html" %}
+{% block body%}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12" >
+            <!--Metodo post es mas seguro-->
+            <form action="directorAdd" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for=""><b>Cédula:</b></label>
+                <input type="text" name="dni" class="form-control" id="ci">
+                <label for=""><b>Apellido:</b></label>
+                <input type="text" name="apellido" class="form-control" id="apellido">
+                <label for=""><b>Nombre:</b></label>
+                <input type="text" name="nombre" class="form-control" id="nombre">
+                <label for=""><b>Fotografia</b></label>
+                <input type="file", name="foto_dir" id="foto_dir" accept="image/*" required class="form-control">
+                <label for=""><b>Estado:</b></label>
+                <select class="form-control" name="estadoo" id="estado">
+                    <option value="">--SELECCIONE--</option>
+                    <option value="True">Activo</option>
+                    <option value="False">Inactivo</option>
+                </select>
+                <br>
+                <button  type="sumit" class="btn btn-primary">
+                    Guardar
+                </button>
+
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="btn btn-danger" href="{% url 'listadoDirectores' %}">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

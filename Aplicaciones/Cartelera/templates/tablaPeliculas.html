@@ -1,0 +1,40 @@
+{% block body %}
+<div class="container mt-5">
+    <h1>Listado de Películas</h1>
+    <ul id="peliculaList" class="list-group mt-3">
+    </ul>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    try {
+        const response = await fetch("{% url 'tablePeliculasFetch' %}", {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            credentials: 'same-origin'
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const peliculaList = document.getElementById('peliculaList');
+        peliculaList.innerHTML = '';
+
+        data.forEach(pelicula => {
+            const listItem = document.createElement('li');
+            listItem.className = 'list-group-item';
+            listItem.textContent = `${pelicula.titulo} - Duración: ${pelicula.duracion} - Género: ${pelicula.genero__nombre_genero} - Director: ${pelicula.director__nombre_director} - Sinopsis: ${pelicula.sinopsis}`;
+            peliculaList.appendChild(listItem);
+        });
+    } catch (error) {
+        console.error('Error al obtener las películas:', error);
+    }
+});
+</script>
+
+
+{% endblock %}

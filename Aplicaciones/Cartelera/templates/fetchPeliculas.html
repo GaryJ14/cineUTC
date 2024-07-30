@@ -1,0 +1,118 @@
+{% extends "./plantilla.html" %}
+{% block body%}
+<h2> Pelicula con fetch</h2>
+
+
+<!-- Modal -->
+<div class="modal fade" id="crearPeliculaModal" tabindex="-1" aria-labelledby="crearPeliculaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="crearPeliculaModalLabel">Crear Película</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="crearPeliculaForm" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">Título</label>
+                        <input type="text" class="form-control" id="titulo" name="titulo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="duracion" class="form-label">Duración</label>
+                        <input type="time" class="form-control" id="duracion" name="duracion">
+                    </div>
+                    <div class="mb-3">
+                        <label for="sinopsis" class="form-label">Sinopsis</label>
+                        <textarea class="form-control" id="sinopsis" name="sinopsis" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="genero" class="form-label">Género</label>
+                        <select class="form-select" id="genero" name="genero" required>
+                            <option value="">--SELECCIONE--</option>
+                            {% for genero in generos %}
+                                <option value="{{ genero.id }}">{{ genero.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="director" class="form-label">Director</label>
+                        <select class="form-select" id="director" name="director" required>
+                            <option value="">--SELECCIONE--</option>
+                            {% for director in directores %}
+                                <option value="{{ director.id }}">{{director.nombre}} {{director.apellido}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="portada" class="form-label">Portada</label>
+                        <input type="file" class="form-control" id="portada" name="portada">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary" id="guardarPeliculaBtn">Guardar Película</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mt-5" data-bs-toggle="modal" data-bs-target="#crearPeliculaModal">
+    Agregar pelicula
+</button>
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('crearPeliculaForm');
+    const guardarBtn = document.getElementById('guardarPeliculaBtn');
+
+    guardarBtn.addEventListener('click', async function() {
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch("{% url 'peliculaAddFetch' %}", {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                credentials: 'same-origin'
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+                Swal.fire({
+                    title: "CONFIRMACIÓN",
+                    text: data.mensaje,
+                    icon: 'success'
+                });
+   
+            }
+
+            const data = await response.json();
+            console.log('Película guardada correctamente');
+            $('#crearPeliculaModal').modal('hide');
+            window.location.href = "{% url 'fetchPeliculas' %}";
+        } catch (error) {
+            console.error('Error al guardar la película:', error);
+        }
+    });
+});
+</script>
+
+
+
+
+
+
+
+
+
+{% include "./tablaPeliculas.html" %}
+
+{% endblock %}

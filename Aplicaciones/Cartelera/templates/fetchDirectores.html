@@ -1,0 +1,85 @@
+{% extends "./plantilla.html" %}
+{% block body%}
+<!-- Button trigger modal -->
+ <h2>Fetch con directores</h2>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#directorModal">
+    Registrar Director
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="directorModal" tabindex="-1" aria-labelledby="directorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="directorModalLabel">Registrar Director</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="directorFormFetch">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="dni" class="form-label">Cédula</label>
+              <input type="text" class="form-control" id="dni" name="dni" required>
+            </div>
+            <div class="mb-3">
+              <label for="apellido" class="form-label">Apellido</label>
+              <input type="text" class="form-control" id="apellido" name="apellido" required>
+            </div>
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+            <div class="mb-3">
+              <label for="foto_dir" class="form-label">Foto</label>
+              <input type="file" class="form-control" id="foto_dir" name="foto_dir" required>
+            </div>
+            <div class="mb-3">
+              <label for="estado" class="form-label">Estado</label>
+              <select class="form-control" id="estado" name="estado" required>
+                <option value="True">Activo</option>
+                <option value="False">Inactivo</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  {% include 'tablaDirectores.html' %} 
+
+
+  <script>
+    document.getElementById('directorFormFetch').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+    
+        const response = await fetch("{% url 'directorAddFetch' %}", {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            credentials: 'same-origin'
+        });
+    
+        const data = await response.json();
+        if (response.ok) {
+            Swal.fire({
+                title: "CONFIRMACIÓN",
+                text: data.mensaje,
+                icon: 'success'
+            });
+            //cerrar modal
+            $('#directorFormFetch').modal('hide');
+            window.location.href = "{% url 'fetchDirectores' %}";
+        } else {
+            alert(data.error);
+        }
+    });
+    </script>
+
+{% endblock %}

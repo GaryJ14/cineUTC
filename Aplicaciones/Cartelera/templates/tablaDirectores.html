@@ -1,0 +1,48 @@
+{% block body %}
+
+<div class="container mt-5">
+    <h1>Listado de Directores</h1>
+    <ul id="directorList" class="list-group mt-3">
+
+    </ul>
+</div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    try {
+        const response = await fetch("{% url 'TablaFetchDirectores' %}", {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            credentials: 'same-origin'
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const directorList = document.getElementById('directorList');
+        directorList.innerHTML = '';
+
+        data.forEach(director => {
+            const listItem = document.createElement('li');
+            listItem.className = 'list-group-item';
+            listItem.textContent = `
+            ${director.id}
+            ${director.nombre} 
+            ${director.apellido} 
+            ${director.dni} 
+            ${director.estado? 'Activo' : 'Inactivo'}`;
+            directorList.appendChild(listItem);
+        });
+    } catch (error) {
+        console.error('Error al obtener los directores:', error);
+    }
+});
+</script>
+
+{% endblock %}
+
