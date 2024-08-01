@@ -50,7 +50,7 @@ def procesarActualizacionGenero(request):
 def ListadoPaises (request):
     paisbdd=Paises.objects.all()
 
-    return render(request, "ListadoPaises.html",{'pais': paisbdd})
+    return render(request, "listadoPaises.html",{'pais': paisbdd})
 
 def nuevoPais(request):
     return render(request,'nuevoPais.html')
