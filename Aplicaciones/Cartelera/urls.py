@@ -22,7 +22,7 @@ urlpatterns=[
     path('editarGenero/<id>', views.editarGenero,name='editarGenero'),
     path('procesarActualizacionPis/', views.procesarActualizacionGenero,name='procesarActualizacionGenero'),
     #PAIS
-    path('listadoPais/', views.ListadoPaises, name='listadoPais'),
+    path('ListadoPaises/', views.ListadoPaises, name='ListadoPaises'),
     path('nuevoPais/', views.nuevoPais,name='nuevoPais'),
     path('guardarPais/', views.guardarPais,name='guardarPais'),
     path('editarPais/<id>', views.editarPais,name='editarPais'),
@@ -32,7 +32,7 @@ urlpatterns=[
     #DIRECTORES 
     path('tableDirectores', views.tablaDirectores, name = 'tableDirectores'),
     path('TablaFetchDirectores', views.TablaFetchDirectores, name = 'TablaFetchDirectores'),
-    path('listadoDirectores', views.ListadoDirectores, name = 'listadoDirectores'), 
+    path('listadoDirectores', views.listadoDirectores, name = 'listadoDirectores'), 
     path('fetchDirectores', views.fetchDirectores, name = 'fetchDirectores'), 
     path('directorDel/<id>', views.directorDel, name = 'directorDel'),
     path('directorAddForm', views.directorAddForm, name = 'directorPaises'),

@@ -7,10 +7,10 @@ from django.views.decorators.csrf import csrf_exempt
 def home(request):
     return render(request,"home.html")
 #Renderizando el template de ListadoGeneros
-def ListadoGeneros(request):
+def listadoGeneros(request):
     generosbdd=Genero.objects.all()
 
-    return render(request, "ListadoGeneros.html",{'generos': generosbdd})
+    return render(request, "listadoGeneros.html",{'generos': generosbdd})
 
 #Se revibe el id para eliminar un genero
 def eliminarGenero(request,id):
@@ -85,7 +85,7 @@ def procesarActualizacionPais(request):
     messages.success(request, 'Pais actualizado exitosamente.')
     return redirect('listadoPais')
 #-------------------------------DIRECTORES----------------------------------------------------s
-def ListadoDirectores(request):
+def listadoDirectores(request):
     directoresBdd=Director.objects.all()
     return render(request, "listadoDirectores.html", {'directores':directoresBdd})
 
