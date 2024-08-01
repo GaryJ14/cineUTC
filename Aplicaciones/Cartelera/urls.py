@@ -43,7 +43,7 @@ urlpatterns=[
 
     #PELICULAS
    
-    path('listadoPeliculas', views.ListadoPeliculas, name='listadoPeliculas'),
+    path('listadoPeliculas', views.ListadoPeliculas),
     path('tablePeliculasFetch', views.tablaPeliculasFetch, name='tablePeliculasFetch'),
     path('fetchPeliculas', views.fetchPeliculas, name='fetchPeliculas'),
     path('peliculaAddFetch', views.peliculaAddFetch, name='peliculaAddFetch'),
