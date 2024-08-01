@@ -22,7 +22,7 @@ urlpatterns=[
     path('editarGenero/<id>', views.editarGenero,name='editarGenero'),
     path('procesarActualizacionPis/', views.procesarActualizacionGenero,name='procesarActualizacionGenero'),
     #PAIS
-    path('listadoPais/', views.ListadoPaises, name='listadoPais'),
+    path('listadoPais/', views.listadoPais, name='listadoPais'),
     path('nuevoPais/', views.nuevoPais,name='nuevoPais'),
     path('guardarPais/', views.guardarPais,name='guardarPais'),
     path('editarPais/<id>', views.editarPais,name='editarPais'),

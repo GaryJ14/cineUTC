@@ -47,7 +47,7 @@ def procesarActualizacionGenero(request):
 #-----------------------------Pais--------------------------------------------------------------
 #crear una nueva variable 
 
-def ListadoPaises (request):
+def listadoPais (request):
     paisbdd=Paises.objects.all()
 
     return render(request, "listadoPaises.html",{'pais': paisbdd})
