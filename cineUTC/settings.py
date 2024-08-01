@@ -42,10 +42,19 @@ INSTALLED_APPS = [
     'Aplicaciones.Cartelera',
 ]
 
+# MIDDLEWARE = [
+#     'django.middleware.security.SecurityMiddleware',
+#     #Añadimos la librerira
+#     'whitenoise.middleware.WhiteNoiseMiddleware'
+#     'django.contrib.sessions.middleware.SessionMiddleware',
+#     'django.middleware.common.CommonMiddleware',
+#     'django.middleware.csrf.CsrfViewMiddleware',
+#     'django.contrib.auth.middleware.AuthenticationMiddleware',
+#     'django.contrib.messages.middleware.MessageMiddleware',
+#     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+# ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    #Añadimos la librerira
-    'whitenoise.middleware.WhiteNoiseMiddleware'
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -53,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'cineUTC.urls'
 
