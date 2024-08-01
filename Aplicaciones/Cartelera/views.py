@@ -10,7 +10,7 @@ def home(request):
 def ListadoGeneros(request):
     generosbdd=Genero.objects.all()
 
-    return render(request, "ListadoGeneros.html",{'generos': generosbdd})
+    return render(request, "listadoGeneros.html",{'generos': generosbdd})
 
 #Se revibe el id para eliminar un genero
 def eliminarGenero(request,id):
@@ -50,7 +50,7 @@ def procesarActualizacionGenero(request):
 def ListadoPaises (request):
     paisbdd=Paises.objects.all()
 
-    return render(request, "ListadoPaises.html",{'pais': paisbdd})
+    return render(request, "listadoPaises.html",{'pais': paisbdd})
 
 def nuevoPais(request):
     return render(request,'nuevoPais.html')
